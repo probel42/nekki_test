@@ -1,0 +1,29 @@
+volumes:
+  backend_build_volume:
+
+services:
+  backend_build:
+    build:
+      context: .
+      dockerfile: builder_dockerfile
+    volumes:
+      - backend_build_volume:/usr/app/backend/build/libs/
+    networks:
+      - default_network
+
+  backend:
+    build:
+      context: .
+      dockerfile: app_dockerfile
+    volumes:
+      - backend_build_volume:/app
+    depends_on:
+      - backend_build
+    ports:
+      - 1109:1109
+    networks:
+      - default_network
+
+networks:
+  default_network:
+    name: network

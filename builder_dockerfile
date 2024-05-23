@@ -1,0 +1,8 @@
+FROM gradle:8.7.0-jdk17
+ENV APP_HOME=/usr/app/backend
+WORKDIR $APP_HOME
+COPY settings.gradle $APP_HOME
+COPY build.gradle $APP_HOME
+COPY --chown=gradle:gradle src/ $APP_HOME/src
+RUN gradle clean jar -x test
+RUN mv $APP_HOME/build/libs/nekki_test-1.0-SNAPSHOT.jar $APP_HOME/build/libs/backend.jar

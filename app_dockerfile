@@ -1,0 +1,4 @@
+FROM openjdk:17
+ENV APP_HOME=/app
+WORKDIR $APP_HOME
+CMD java -jar backend.jar
