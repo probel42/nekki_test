@@ -48,13 +48,7 @@ public class Server {
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		} finally {
-			connectionPool.forEach(con -> {
-				try {
-					con.close();
-				} catch (Exception e) {
-					log.error(e.getMessage());
-				}
-			});
+			connectionPool.forEach(con -> closeConnection(con, false));
 		}
 	}
 
