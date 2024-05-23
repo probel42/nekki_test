@@ -1,11 +1,13 @@
 package ru.ibelan;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Player data.
  */
-@Data
+@Getter
+@Setter
 public class Player {
 	private String nickname;
 }
