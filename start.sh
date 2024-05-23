@@ -1,3 +1,3 @@
 #/bin/sh
 
-docker-compose -p nekki up -d --remove-orphans
+docker-compose -p ibelan_nekki up -d --remove-orphans

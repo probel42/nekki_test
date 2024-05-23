@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker-compose -p nekki down
+docker-compose -p ibelan_nekki down
