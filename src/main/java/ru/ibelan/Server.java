@@ -4,10 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Server class.
@@ -16,12 +16,12 @@ import java.util.Queue;
 public class Server {
 	private volatile boolean isRunning = false;
 
-	// Все соединения
-	private final List<Connection> connectionPool = new ArrayList<>();
+	// все соединения
+	private final Set<Connection> connectionPool = ConcurrentHashMap.newKeySet();
 
-	// Очередь игроков (точнее их соединений) (хотя вообще, это осмысленно только в случае больших очередей,
-	// а тут можно заменить на одного ожидающего)
-	private final Queue<Connection> queue = new LinkedList<>();
+	// oчередь игроков (точнее их соединений)
+	// (хотя вообще, это осмысленно только в случае больших очередей, а тут можно заменить на одного ожидающего)
+	private final Queue<Connection> queue = new ConcurrentLinkedQueue<>();
 
 	public void run(int port, int connectionsLimit) {
 		Thread serverThread = new Thread(() -> runServer(port, connectionsLimit));
