@@ -11,12 +11,20 @@ public class App {
 	private static final String SERVER_PORT = "server.port";
 	private static final String CONNECTIONS_LIMIT = "server.connectionsLimit";
 
-	public static void main(String[] args) throws ConfigurationException {
+	private static final int DEFAULT_PORT = 23;
+	private static final int DEFAULT_CONNECTIONS_LIMIT = 100;
+
+	public static void main(String[] args) {
 		// load properties
-		PropertiesConfiguration config = new PropertiesConfiguration();
-		config.load(PROPERTIES);
-		int port = config.getInt(SERVER_PORT);
-		int connectionsLimit = config.getInt(CONNECTIONS_LIMIT);
+		int port = DEFAULT_PORT;
+		int connectionsLimit = DEFAULT_CONNECTIONS_LIMIT;
+		try {
+			PropertiesConfiguration config = new PropertiesConfiguration();
+			config.load(PROPERTIES);
+			port = config.getInt(SERVER_PORT);
+			connectionsLimit = config.getInt(CONNECTIONS_LIMIT);
+		} catch (ConfigurationException ignore) {
+		}
 
 		// start server
 		Server server = new Server();

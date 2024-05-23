@@ -5,14 +5,24 @@ plugins {
 group 'ru.ibelan'
 version '1.0-SNAPSHOT'
 
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    manifest {
+        attributes 'Main-Class' : 'ru.ibelan.App'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    implementation group: 'org.slf4j', name: 'slf4j-log4j12', version: '2.0.13'
     implementation 'commons-configuration:commons-configuration:1.10'
-    implementation 'org.slf4j:slf4j-api:2.0.13'
-    implementation 'org.slf4j:slf4j-reload4j:2.0.13'
 
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
