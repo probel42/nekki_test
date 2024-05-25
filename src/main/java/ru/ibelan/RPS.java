@@ -1,8 +1,5 @@
 package ru.ibelan;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 public enum RPS {
 	ROCK,
 	PAPER,

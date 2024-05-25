@@ -1,11 +1,13 @@
 package ru.ibelan;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 
 /**
  * Main class.
  */
+@Slf4j
 public class App {
 	private static final String PROPERTIES = "app.properties";
 	private static final String SERVER_PORT = "server.port";
@@ -24,6 +26,7 @@ public class App {
 			port = config.getInt(SERVER_PORT);
 			connectionsLimit = config.getInt(CONNECTIONS_LIMIT);
 		} catch (ConfigurationException ignore) {
+			log.warn("Can't load property file \"{}\"", PROPERTIES);
 		}
 
 		// start server

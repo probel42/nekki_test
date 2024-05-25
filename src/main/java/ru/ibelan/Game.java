@@ -1,5 +1,6 @@
 package ru.ibelan;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Game class.
  */
 @Slf4j
+@RequiredArgsConstructor
 public class Game {
 	private final Server server;
 	private final Connection connection1;
@@ -18,12 +20,6 @@ public class Game {
 
 	private final AtomicInteger roundNumber = new AtomicInteger(1);
 	private final ConcurrentMap<Player, RPS> decisions = new ConcurrentHashMap<>();
-
-	public Game(Server server, Connection connection1, Connection connection2) {
-		this.server = server;
-		this.connection1 = connection1;
-		this.connection2 = connection2;
-	}
 
 	public void start() {
 		try {
